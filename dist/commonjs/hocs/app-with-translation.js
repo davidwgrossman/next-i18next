@@ -206,7 +206,7 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
       key: "getInitialProps",
       value: function () {
         var _getInitialProps = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(ctx) {
-          var _ctx$ctx, req, res, initialI18nStore, initialLanguage, i18nServerInstance, middlewares, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step, wrappedComponentProps, namespacesRequired, fallbackLng, languagesToLoad;
+          var _ctx$ctx, req, res, initialI18nStore, initialLanguage, i18nServerInstance, middlewares, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step, wrappedComponentProps, i18nOverrideLanguage, namespacesRequired, fallbackLng, languagesToLoad;
 
           return _regenerator["default"].wrap(function _callee2$(_context3) {
             while (1) {
@@ -332,28 +332,36 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
 
 
                   if (!(req && req.i18n)) {
-                    _context3.next = 45;
+                    _context3.next = 46;
                     break;
                   }
 
-                  initialLanguage = (0, _utils.lngFromReq)(req);
+                  i18nOverrideLanguage = wrappedComponentProps.pageProps.i18nOverrideLanguage;
+
+                  if (typeof i18nOverrideLanguage !== 'undefined') {
+                    consoleMessage('info', "using i18nOverrideLanguage ".concat(i18nOverrideLanguage));
+                    initialLanguage = i18nOverrideLanguage;
+                  } else {
+                    initialLanguage = (0, _utils.lngFromReq)(req);
+                  }
                   /*
                     Perform a lang change in case we're not on the right lang
                   */
 
-                  _context3.next = 43;
+
+                  _context3.next = 44;
                   return req.i18n.changeLanguage(initialLanguage);
 
-                case 43:
-                  _context3.next = 46;
+                case 44:
+                  _context3.next = 47;
                   break;
 
-                case 45:
+                case 46:
                   if (Array.isArray(i18n.languages) && i18n.languages.length > 0) {
                     initialLanguage = i18n.language;
                   }
 
-                case 46:
+                case 47:
                   /*
                     Step 2: Determine namespace dependencies
                   */
@@ -381,7 +389,7 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
 
 
                   if (!(req && req.i18n)) {
-                    _context3.next = 55;
+                    _context3.next = 56;
                     break;
                   }
 
@@ -401,22 +409,22 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
                       initialI18nStore[lng][ns] = (req.i18n.services.resourceStore.data[lng] || {})[ns] || {};
                     });
                   });
-                  _context3.next = 59;
+                  _context3.next = 60;
                   break;
 
-                case 55:
+                case 56:
                   if (!(Array.isArray(i18n.languages) && i18n.languages.length > 0)) {
-                    _context3.next = 59;
+                    _context3.next = 60;
                     break;
                   }
 
-                  _context3.next = 58;
+                  _context3.next = 59;
                   return clientLoadNamespaces(i18n.languages[0], namespacesRequired);
 
-                case 58:
+                case 59:
                   initialI18nStore = i18n.store.data;
 
-                case 59:
+                case 60:
                   /*
                     Step 4: Overwrite i18n.toJSON method to be able to serialize the instance
                   */
@@ -438,7 +446,7 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
                     i18nServerInstance: i18nServerInstance
                   }, wrappedComponentProps));
 
-                case 61:
+                case 62:
                 case "end":
                   return _context3.stop();
               }
