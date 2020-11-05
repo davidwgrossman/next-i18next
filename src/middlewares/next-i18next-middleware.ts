@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { NextFunction, Request, Response } from 'express'
 import i18nextMiddleware from 'i18next-http-middleware/cjs'
 
@@ -27,6 +29,7 @@ export default function (nexti18next) {
   if (!config.serverLanguageDetection) {
     middleware.push((req: NextI18NextRequest, _res: Response, next: NextFunction) => {
       if (isI18nRoute(req)) {
+        console.log(`i'm the request before you use config.defaultLangauge: ${req.lng}`)
         req.lng = config.defaultLanguage
       }
       next()
