@@ -23,7 +23,6 @@ export default function (nexti18next) {
   if (!config.serverLanguageDetection) {
     middleware.push((req, _res, next) => {
       if (isI18nRoute(req)) {
-        console.log(`i'm the request before you use config.defaultLangauge: ${req.lng}`);
         req.lng = config.defaultLanguage;
       }
 

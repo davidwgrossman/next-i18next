@@ -118,7 +118,7 @@ export const appWithTranslation = function (WrappedComponent) {
         const i18nOverrideLanguage = wrappedComponentProps.pageProps.i18nOverrideLanguage;
 
         if (typeof i18nOverrideLanguage !== 'undefined') {
-          consoleMessage('info', `using i18nOverrideLanguage ${i18nOverrideLanguage}`);
+          consoleMessage('debug', `using i18nOverrideLanguage ${i18nOverrideLanguage}`);
           initialLanguage = i18nOverrideLanguage;
         } else {
           initialLanguage = lngFromReq(req);

@@ -40,7 +40,6 @@ function _default(nexti18next) {
   if (!config.serverLanguageDetection) {
     middleware.push(function (req, _res, next) {
       if (isI18nRoute(req)) {
-        console.log("i'm the request before you use config.defaultLangauge: ".concat(req.lng));
         req.lng = config.defaultLanguage;
       }
 
