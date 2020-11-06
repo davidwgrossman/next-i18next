@@ -3,21 +3,23 @@ import { i18n, Link, withTranslation } from '../i18n'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-const Homepage = ({ t }) => (
-  <>
+const Homepage = ({ t }) => {
+
+  i18n.changeLanguage('de');
+  return <>
     <main>
       <Header title={t('h1')} />
       <div>
         <button
           type='button'
           onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'de' : 'en')}
-        >
+          >
           {t('change-locale')}
         </button>
         <Link href='/second-page'>
           <button
             type='button'
-          >
+            >
             {t('to-second-page')}
           </button>
         </Link>
@@ -25,7 +27,8 @@ const Homepage = ({ t }) => (
     </main>
     <Footer />
   </>
-)
+}
+
 
 Homepage.getInitialProps = async () => ({
   namespacesRequired: ['common', 'footer'],

@@ -17,6 +17,7 @@ interface Props {
 interface WrappedComponentProps {
   pageProps: {
     namespacesRequired?: string[];
+    i18nOverrideLanguage?: string;
   };
 }
 
@@ -105,8 +106,13 @@ export const appWithTranslation = function (WrappedComponent) {
         Step 1: Determine initial language
       */
       if (req && req.i18n) {
-
-        initialLanguage = lngFromReq(req)
+        const i18nOverrideLanguage = wrappedComponentProps.pageProps.i18nOverrideLanguage;
+        if (typeof i18nOverrideLanguage !== 'undefined') {
+          consoleMessage('debug', `using i18nOverrideLanguage ${i18nOverrideLanguage}`)
+          initialLanguage = i18nOverrideLanguage
+        } else {
+          initialLanguage = lngFromReq(req)
+        }
 
         /*
           Perform a lang change in case we're not on the right lang
