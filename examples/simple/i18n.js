@@ -1,7 +1,6 @@
 const NextI18Next = require('next-i18next').default
 const { localeSubpaths } = require('next/config').default().publicRuntimeConfig
 const path = require('path')
-const I18nextCLILanguageDetector = require('./customDetector')
 
 const detector = {
   name: 'always-serve-german',
@@ -21,7 +20,8 @@ const detector = {
 
 module.exports = new NextI18Next({
   otherLanguages: ['de'],
-  lng: 'en',
+  // Comment out the line below to use language detection
+  // lng: 'en',
   localeSubpaths,
   localePath: path.resolve('./public/static/locales'),
   debug: true,
